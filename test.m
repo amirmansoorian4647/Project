@@ -20,10 +20,7 @@ receiving_times = [0 5];
 for t = receiving_times
    r = r0 + t*v;
    [Y,T] = received_sig(S,r_prim,r,d,fc,Diversity);
-   if t==0
-       T0 = T;
-   end
-   shift_time = t-(T-T0);   
+   shift_time = t-T;   
    received_signal = Y(:,(shift_time<time)&(time<=(shift_time+window_size)));
    
    theta = MUSIC(received_signal,d,fc);
