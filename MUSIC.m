@@ -1,4 +1,4 @@
-function theta = MUSIC(received_signal,d,fc)
+function [theta,g] = MUSIC(received_signal,d,fc)
 % redeived_sig is a matrix that i_th row of it is received signal in i_th element of array
 % d = distance between first element to other elements of array (it's a vertical vector)
 % fc = carrier frequency
@@ -27,11 +27,11 @@ function theta = MUSIC(received_signal,d,fc)
     source_numbers = i;
     U_nall = U(:,(source_numbers+1):end);
     %-----------------------------------------------------------MUSIC Algorithm
-    theta_deg = (0:1:90);
+    theta_deg = (0:0.1:90);
     theta_rad = theta_deg*pi/180;
     a = exp(-1i*k*d*sin(theta_rad));
     g = 1./vecnorm(a'*U_nall,2,2);
     TF = islocalmax(g);
-    theta = theta_deg(TF);
+    theta = theta_rad(TF);
 
 end
