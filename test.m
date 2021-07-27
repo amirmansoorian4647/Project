@@ -10,7 +10,7 @@ d = [0;0.25];      % array dist elements [m] (array is linier)
 fc = 5e6;          % carrier freq [Hz]
 Diversity = @(theta_s) 1;% source diversity
 
-window_size = 3;   % [sec]
+window_size = 0.05;   % [sec]
 
 fs = 1e3;         % sampling freq [Hz]
 time = 0:1/fs:20;
@@ -24,7 +24,7 @@ for t = receiving_times
        T0 = T;
    end
    shift_time = t-(T-T0);   
-   received_signal = Y(:,shift_time<time<=(shift_time+window_size));
+   received_signal = Y(:,(shift_time<time)&(time<=(shift_time+window_size)));
    
    theta = MUSIC(received_signal,d,fc);
    disp(theta)
