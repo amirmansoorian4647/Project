@@ -1,4 +1,4 @@
-function [theta,g] = MUSIC(received_signal,d,fc)
+function theta = MUSIC(received_signal,d,fc)
 % redeived_sig is a matrix that i_th row of it is received signal in i_th element of array
 % d = distance between first element to other elements of array (it's a vertical vector)
 % fc = carrier frequency
